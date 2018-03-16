@@ -92,7 +92,7 @@ multiply(4, 3, function(answer){
 
 //Code Here 
 function contains(arr, name, callback) {
-  return arr.includes(name) ? true : false
+  return arr.includes(name) ? callback(true) : callback(false)
 }
 // Do not edit the code below.
 contains(names, 'Colt', function(result){
@@ -115,14 +115,16 @@ contains(names, 'Colt', function(result){
 
 //Code Here
 function uniq(arr, callback) {
-  arr.filter((val1, val2) => {
-    if(val1 === val2) {
-      let index = val1.indexOf();
-      let index2 = val2.indexOf();
-      arr.splice(index, 1);
-      arr.splice(index2, 1);
+  //Use the i counter to loop over the names.length, and increment over i and j
+  for(var i = 0; i < arr.length; i++) {
+    for(var j = i + 1; j < arr.length; j++) {
+      if(arr[i] === arr[j]) {
+        arr.splice(j, 1);
+      }
     }
-  })
+  }
+  //After altering the array.
+  return callback(arr);
 }
 // Do not edit the code below.
 uniq(names, function(uniqArr){
@@ -175,7 +177,6 @@ var users = [
     id: '12d',
     email: 'tyler@gmail.com',
     name: 'Tyler',
-    address: '167 East 500 North'
   },
   {
     id: '15a',
